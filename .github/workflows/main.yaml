@@ -65,6 +65,7 @@ deploy-test:
           curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
  
+ 
  deploy-preprod:
     needs: deploy-test
     runs-on: ubuntu-latest
@@ -73,11 +74,11 @@ deploy-test:
         with:
           name: war-file
 
-      - name: 🚀 Deploy to PRE-PROD
+      - name: 🚀 Deploy to PREPROD
         env:
-          URL: ${{ secrets.TOMCAT_URL_PRE_PROD }}
-          USER: ${{ secrets.TOMCAT_USER_PRE_PROD }}
-          PASS: ${{ secrets.TOMCAT_PASS_PRE_PROD }}
+          URL: ${{ secrets.TOMCAT_URL_PREPROD }}
+          USER: ${{ secrets.TOMCAT_USER_PREPROD }}
+          PASS: ${{ secrets.TOMCAT_PASS_PREPROD }}
         run: |
           WAR_FILE=$(ls *.war | head -n 1)
           echo "Deploying $WAR_FILE to PRE-POD ($URL)"
@@ -94,9 +95,9 @@ deploy-prod:
 
       - name: 🚀 Deploy to PROD
         env:
-          URL: ${{ secrets.TOMCAT_URL_POD }}
-          USER: ${{ secrets.TOMCAT_USER_POD }}
-          PASS: ${{ secrets.TOMCAT_PASS_POD }}
+          URL: ${{ secrets.TOMCAT_URL_PROD }}
+          USER: ${{ secrets.TOMCAT_USER_PROD }}
+          PASS: ${{ secrets.TOMCAT_PASS_PROD }}
         run: |
           WAR_FILE=$(ls *.war | head -n 1)
           
