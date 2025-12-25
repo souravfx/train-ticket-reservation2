@@ -103,6 +103,4 @@ jobs:
           PASS: ${{ secrets.TOMCAT_PASS_PROD }}
         run: |
           WAR_FILE=$(ls *.war | head -n 1)
-          echo "Deploying $WAR_FILE to PROD ($URL)"
-          curl -u "$USER:$PASS" --fail -T "$WAR_FILE" \
-            "$URL/deploy?path=/train-ticket-reservation&update=true"
+          
