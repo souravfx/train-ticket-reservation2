@@ -65,8 +65,7 @@ deploy-test:
           curl -v -u "$USER:$PASS" "$URL/list"
           curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
-
-  deploy-prepod:
+ deploy-prepod:
     needs: deploy-test
     runs-on: ubuntu-latest
     steps:
