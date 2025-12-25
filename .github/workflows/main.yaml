@@ -30,8 +30,7 @@ jobs:
         with:
           name: war-file
           path: ${{ env.WAR_FILE }}
-
-  deploy-dev:
+deploy-dev:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -65,7 +64,7 @@ deploy-test:
           curl -v -u "$USER:$PASS" "$URL/list"
           curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
- deploy-prepod:
+ deploy-preprod:
     needs: deploy-test
     runs-on: ubuntu-latest
     steps:
@@ -84,8 +83,7 @@ deploy-test:
           curl -v -u "$USER:$PASS" "$URL/list"
           curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
-
-  deploy-prod:
+deploy-prod:
     needs: deploy-prepod
     runs-on: ubuntu-latest
     steps:
