@@ -64,6 +64,7 @@ deploy-test:
           curl -v -u "$USER:$PASS" "$URL/list"
           curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
+ 
  deploy-preprod:
     needs: deploy-test
     runs-on: ubuntu-latest
@@ -84,7 +85,7 @@ deploy-test:
           curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
             "$URL/deploy?path=/train-ticket-reservation&update=true"
 deploy-prod:
-    needs: deploy-prepod
+    needs: deploy-preprod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
