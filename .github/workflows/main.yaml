@@ -101,12 +101,4 @@ deploy-test:
           PASS: ${{ secrets.TOMCAT_PASS_POD }}
         run: |
           WAR_FILE=$(ls *.war | head -n 1)
-          echo "Deploying $WAR_FILE to PROD ($URL)"
-          curl -v -u "$USER:$PASS" "$URL/list"
-          curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
-            "$URL/deploy?path=/train-ticket-reservation&update=true"
-         
-          echo "Deploying $WAR_FILE to DEV ($URL)"
-          curl -v -u "$USER:$PASS" "$URL/list"
-          curl -v -u "$USER:$PASS" --fail --show-error -T "$WAR_FILE" \
-            "$URL/deploy?path=/train-ticket-reservation&update=true"
+          
