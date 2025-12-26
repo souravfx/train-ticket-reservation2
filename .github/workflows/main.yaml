@@ -51,7 +51,7 @@ jobs:
             "$URL/deploy?path=/train-ticket-reservation&update=true"
 
   deploy-test:
-    needs: build
+    needs: deploy-dev
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -70,7 +70,7 @@ jobs:
             "$URL/deploy?path=/train-ticket-reservation&update=true"
 
   deploy-pre-prod:
-    needs: build
+    needs: deploy-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
@@ -89,7 +89,7 @@ jobs:
             "$URL/deploy?path=/train-ticket-reservation&update=true"
 
   deploy-prod:
-    needs: build
+    needs: deploy-pre-prod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v4
